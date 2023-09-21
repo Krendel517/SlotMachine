@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 360322549199388484}
   - component: {fileID: 5478020903546180155}
   - component: {fileID: 3901186788859757898}
+  - component: {fileID: 6753373472817986746}
   m_Layer: 0
-  m_Name: Emerald_textur
+  m_Name: Slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3480776401406826727}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.062891826, y: 0.1956648, z: 0.020958759}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -97,3 +98,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96149a5cafbaaad4481cda0c24d1d761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _slotObj: {fileID: 3480776401406826727}
+  _speed: 200
+--- !u!61 &6753373472817986746
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3480776401406826727}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 12, y: 12}
+    newSize: {x: 12, y: 12}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 12, y: 12}
+  m_EdgeRadius: 0
