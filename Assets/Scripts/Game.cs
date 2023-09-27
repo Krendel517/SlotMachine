@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class Game : MonoBehaviour
@@ -8,8 +7,6 @@ public class Game : MonoBehaviour
     private Vector2Int _size;
     [SerializeField]
     private SlotMachine _slotMachine;
-
-    private Slot[] _slots;
 
     private void Start()
     {
