@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI : MonoBehaviour
+public class GameHUD : MonoBehaviour
 {
     [SerializeField]
     Button _buttonPlay;
@@ -14,7 +14,7 @@ public class UI : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI _playButtonTxt;
 
-    public static Action OnClickPlay;
+    public event Action OnClickPlay;
 
     private void Start()
     {

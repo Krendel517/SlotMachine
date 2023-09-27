@@ -45,4 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _symbol: {fileID: 3901186788859757898, guid: 3a12499aef661fb488643db4510dc793, type: 3}
-  _space: 12
+  _gameHUD: {fileID: 1347370784597844605, guid: ca3f713647979344587d31a5bd16ea0b, type: 3}

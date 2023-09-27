@@ -4,17 +4,11 @@ using UnityEngine;
 public class SlotMachine : MonoBehaviour
 {
     [SerializeField]
-    private Symbol _symbol;
-    [SerializeField]
     private Rill _rill;
+    [SerializeField]
+    private GameHUD _gameHUD;
 
     private Rill[] _rills;
-    private Vector2 _symbolSize;
-
-    private void Awake()
-    {
-        _symbolSize = _symbol.GetComponent<RectTransform>().sizeDelta;
-    }
 
     public void MakeSlotMachin(Vector2Int size)
     {
@@ -28,7 +22,9 @@ public class SlotMachine : MonoBehaviour
         }
 
         for (int i = 0; i < _rills.Length; i++)
+        {
             _rills[i].BuildSimbols(size, i);
-
+            _gameHUD.OnClickPlay += _rills[i].MoveSymbols;
+        }
     }
 }

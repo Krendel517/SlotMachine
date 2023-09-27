@@ -31,11 +31,16 @@ public class Rill : MonoBehaviour
         for (int i = 0; i < _symbols.Length; i++)
         {
             _symbols[i].OnExitFromScreen += TeleportOfSlot;
-            UI.OnClickPlay += _symbols[i].AvailebleMoveChanger;
         }
 
         _bottomPoint.y = _symbols[0].transform.position.y - _symbolSize.y;
         _topPoint.y = _symbols[_symbols.Length - 1].transform.position.y;
+    }
+
+    public void MoveSymbols()
+    {
+        for (int i = 0; i < _symbols.Length; i++)
+            _symbols[i].AvailebleMoveChanger();
     }
 
     public void TeleportOfSlot(GameObject slot)
