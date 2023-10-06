@@ -37,7 +37,7 @@ public class Rill : MonoBehaviour
         _topPoint.y = _symbols[_symbols.Length - 1].transform.position.y;
     }
 
-    public void MoveSymbols()
+    public void AvailableMoveOfSymbols()
     {
         for (int i = 0; i < _symbols.Length; i++)
             _symbols[i].AvailebleMoveChanger();

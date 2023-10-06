@@ -24,7 +24,7 @@ public class SlotMachine : MonoBehaviour
         for (int i = 0; i < _rills.Length; i++)
         {
             _rills[i].BuildSimbols(size, i);
-            _gameHUD.OnClickPlay += _rills[i].MoveSymbols;
+            _gameHUD.OnClickPlay += _rills[i].AvailableMoveOfSymbols;
         }
     }
 }

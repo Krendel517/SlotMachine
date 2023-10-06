@@ -18,7 +18,7 @@ public class Symbol : MonoBehaviour
 
     private void MovingOfSlot()
     {
-        transform.position = new Vector2(transform.position.x, transform.position.y - _speed * Time.fixedDeltaTime);
+        transform.position = new Vector2(transform.position.x, transform.position.y - Time.fixedDeltaTime * _speed);
         OnExitFromScreen?.Invoke(transform.gameObject);
     }
 
