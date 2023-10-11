@@ -1,43 +1,25 @@
 
-using DG.Tweening;
 using UnityEngine;
 
 public class Symbol : MonoBehaviour
 {
-    [SerializeField]
-    private int _speed;
+    private Vector2 _topPoint;
+    private Vector2 _bottomPoint;
 
-    private bool _availableMove;
-    private Tween _tween;
-    private Vector2 _starterPosition;
-
-    public bool AvailableMove 
-    { 
-        private get { return _availableMove; } 
-        set {_availableMove = value; } 
+    public Vector2 TopPoint
+    {
+        private get { return _topPoint; }
+        set { _topPoint = value; }
+    }
+    public Vector2 BottomPoint
+    {
+        private get { return _bottomPoint; }
+        set { _bottomPoint = value; }
     }
 
-    private void Start()
+    private void Update()
     {
-        _starterPosition = transform.position;
-    }
-
-    public void MoveSlot(Vector2 bottomPosition, Vector2 topPosition)
-    {
-        _tween = _tween = transform.DOMoveY(bottomPosition.y, _speed).SetSpeedBased().SetEase(Ease.Linear)
-        .OnComplete(() =>
-        {
-            {
-                transform.position = new Vector2(transform.position.x, topPosition.y);
-                _tween = transform.DOMoveY(_starterPosition.y, _speed).SetSpeedBased().SetEase(Ease.Linear)
-                .OnComplete(() =>
-                {
-                    if (_availableMove)
-                        MoveSlot(bottomPosition, topPosition);
-                    else
-                        _tween.Kill();
-                });
-            }
-        });
+        if (transform.position.y < _bottomPoint.y)
+            transform.position = new Vector2(transform.position.x, _topPoint.y);;
     }
 }

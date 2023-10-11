@@ -18,7 +18,6 @@ public class GameHUD : MonoBehaviour
 
     private void Start()
     {
-        _buttonPlay.GetComponent<SpriteRenderer>();
         _buttonPlay.onClick.AddListener(PlayButton);
     }
 

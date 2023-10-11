@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6979798627085415027}
   - component: {fileID: 8487483754733725551}
   m_Layer: 0
-  m_Name: Rill
+  m_Name: Reel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,4 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _symbol: {fileID: 3901186788859757898, guid: 3a12499aef661fb488643db4510dc793, type: 3}
-  _gameHUD: {fileID: 1347370784597844605, guid: ca3f713647979344587d31a5bd16ea0b, type: 3}
+  _symbolRectTrans: {fileID: 5183591752371941933, guid: 3a12499aef661fb488643db4510dc793, type: 3}
+  _speed: 100

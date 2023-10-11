@@ -833,8 +833,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 547795e969e0a9a4a93a42c19e63d100, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rill: {fileID: 8487483754733725551, guid: c99820e741d53344f906fbc8476b5c2d, type: 3}
+  _reel: {fileID: 8487483754733725551, guid: c99820e741d53344f906fbc8476b5c2d, type: 3}
   _gameHUD: {fileID: 493381128}
+  _spaceBetweenReels: 12
 --- !u!1 &1699439774
 GameObject:
   m_ObjectHideFlags: 0
