@@ -10,7 +10,7 @@ public class SlotMachine : MonoBehaviour
 
     private Rill[] _rills;
 
-    public void MakeSlotMachin(Vector2Int size)
+    public void MakeSlotMachine(Vector2Int size)
     {
         _rills = new Rill[size.x];
 
@@ -24,7 +24,7 @@ public class SlotMachine : MonoBehaviour
         for (int i = 0; i < _rills.Length; i++)
         {
             _rills[i].BuildSimbols(size, i);
-            _gameHUD.OnClickPlay += _rills[i].AvailableMoveOfSymbols;
+            _gameHUD.OnClickPlay += _rills[i].PlaySlot;
         }
     }
 }

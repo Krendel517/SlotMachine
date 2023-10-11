@@ -14,7 +14,7 @@ public class GameHUD : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI _playButtonTxt;
 
-    public event Action OnClickPlay;
+    public event Action<bool> OnClickPlay;
 
     private void Start()
     {
@@ -25,15 +25,16 @@ public class GameHUD : MonoBehaviour
     private void PlayButton()
     {
         if (_buttonPlay.image.sprite == _buttonPlaySpr)
+        {
             _buttonPlay.image.sprite = _buttonStopSpr;
-        else
-            _buttonPlay.image.sprite = _buttonPlaySpr;
-
-        if (_buttonPlay.image.sprite == _buttonPlaySpr)
-            _playButtonTxt.text = "PLAY";
-        else
             _playButtonTxt.text = "STOP";
-
-        OnClickPlay?.Invoke();
+            OnClickPlay?.Invoke(true);
+        }
+        else
+        {
+            _buttonPlay.image.sprite = _buttonPlaySpr;
+            _playButtonTxt.text = "PLAY";
+            OnClickPlay?.Invoke(false);
+        }
     }
 }

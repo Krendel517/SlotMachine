@@ -10,6 +10,6 @@ public class Game : MonoBehaviour
 
     private void Start()
     {
-        _slotMachine.MakeSlotMachin(_size);
+        _slotMachine.MakeSlotMachine(_size);
     }
 }
