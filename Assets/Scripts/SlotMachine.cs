@@ -1,48 +1,100 @@
 
+using DG.Tweening;
 using UnityEngine;
 
 public class SlotMachine : MonoBehaviour
 {
     [SerializeField]
-    private Slot[] _slots;
+    private Transform _mainReelsPackage;
     [SerializeField]
-    private Slot _slot;
+    private int _speed;
+    [SerializeField]
+    private RectTransform _symbolSize;
+    [SerializeField]
+    private Reel _reelPrefab;
+    [SerializeField]
+    private GameHUD _gameHUD;
+    [SerializeField]
+    private int _spaceBetweenReels;
 
-    private Vector2 _botPoint;
-    private Vector2 _topPoint;
-    private Vector2 _slotSize;
 
-    private void Awake()
+    private Transform _reelsPackageSecond;
+    private Reel[] _reelsOfFirstPackage;
+    private Reel[] _reelsOfSecondPackage;
+
+    private Tween _tween;
+    private bool _isAvailableMove;
+    private Vector2 _bottomPosition;
+    private Vector2 _topPosition;
+    private Vector2 _mainScreenPosition;
+
+    public void MakeSlotMachine(Vector2Int size)
     {
-        Slot.OnExitFromScreen += TeleportOfSlot;
-        _slotSize = _slot.GetComponent<SpriteRenderer>().sprite.rect.size / 100;
+        _reelsOfFirstPackage = new Reel[size.x];
+        _reelsOfSecondPackage = new Reel[size.x];
+        _gameHUD.OnClickPlay += PlaySlotMachine;
+
+        _reelsPackageSecond = Instantiate(_mainReelsPackage.transform);
+        _reelsPackageSecond.SetParent(transform);
+
+        BuildPackageOfReels(_reelsOfFirstPackage, size, _mainReelsPackage.transform);
+        BuildPackageOfReels(_reelsOfSecondPackage, size, _reelsPackageSecond);
+
+        _reelsPackageSecond.position = new Vector2(transform.position.x, transform.position.y + _symbolSize.sizeDelta.y * size.y);
+
+        AutorizeVariable(size);
     }
 
-    public void MakeSlotMachin(Vector2Int size)
+    private void BuildPackageOfReels(Reel[] reels, Vector2Int size, Transform reelPackage)
     {
-        Vector2 offSet = new Vector2((size.x - 1) / 0.5f, (size.y - 1) / 0.5f);
-        _slots = new Slot[size.x * size.y];
+        reelPackage.position = transform.position;
 
-        for (int i = 0, x = 0; x < size.x; x++)
+        for (int i = 0; i < size.x; i++)
         {
-            for (int y = 0; y < size.y; y++, i++)
-            {
-                Slot slot = _slots[i] = Instantiate(_slot);
-                slot.transform.SetParent(transform);
-                slot.transform.localPosition = new Vector2(x * (_slotSize.y + 2) - (int)offSet.x, y * _slotSize.y - offSet.y);
-            }
+            reels[i] = Instantiate(_reelPrefab);
+            reels[i].transform.SetParent(reelPackage);
+            reels[i].transform.localPosition = new Vector2(reels[i].transform.position.x + i * _spaceBetweenReels, reels[i].transform.position.y);
         }
 
-        _botPoint.y = _slots[1].transform.position.y - _slotSize.y * 2;
-        _topPoint.y = _slots[_slots.Length - 1].transform.position.y;
-
-        for (int i = 0; i < _slots.Length; i++)
-            UI.OnClickPlay += _slots[i].AvailebleMoveChanger;
+        for (int i = 0; i < reels.Length; i++)
+            reels[i].BuildSymbols(size, i);
     }
 
-    public void TeleportOfSlot(GameObject slot)
+    private void PlayAnimationOfPackage(Transform package)
     {
-        if (slot.transform.position.y < _botPoint.y)
-            slot.transform.position = new Vector2(slot.transform.position.x, _topPoint.y);
+        _tween = package.DOMoveY(_bottomPosition.y, _speed).SetSpeedBased().SetEase(Ease.Linear)
+        .OnComplete(() => ValidateAnimationCycle(package));
+    }
+
+    private void ValidateAnimationCycle(Transform package)
+    {
+        package.position = new Vector2(transform.position.x, _topPosition.y);
+
+        if (_isAvailableMove)
+            PlayAnimationOfPackage(package);
+        else
+            _tween = package.transform.DOMoveY(_mainScreenPosition.y, _speed).SetSpeedBased().SetEase(Ease.Linear)
+            .OnComplete(() => _tween.Kill());
+    }
+
+    private void PlaySlotMachine(bool buttonState)
+    {
+        if (buttonState)
+        {
+            PlayAnimationOfPackage(_mainReelsPackage);
+            PlayAnimationOfPackage(_reelsPackageSecond);
+            _isAvailableMove = true;
+        }
+        else
+        {
+            _isAvailableMove = false;
+        }
+    }
+
+    private void AutorizeVariable(Vector2 size)
+    {
+        _bottomPosition.y = transform.position.y - _symbolSize.sizeDelta.y * size.y;
+        _topPosition.y = transform.position.y + _symbolSize.sizeDelta.y * size.y;
+        _mainScreenPosition = _mainReelsPackage.transform.position;
     }
 }
